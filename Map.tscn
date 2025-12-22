@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://b51wfn2cbge6v"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_jvs3k"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8wfkc"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_gdqwv"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_y35xu"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gfjgm"]
+
+[node name="Map" type="Node"]
+
+[node name="Floor" type="StaticBody3D" parent="."]
+transform = Transform3D(30, 0, 0, 0, 1, 0, 0, 0, 30, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
+mesh = SubResource("BoxMesh_jvs3k")
+skeleton = NodePath("../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+shape = SubResource("BoxShape3D_8wfkc")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 3.3411167, -6.2617593)
+mesh = SubResource("BoxMesh_gdqwv")
+
+[node name="TestArea" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.811167, 1.6573095, 0)
+mesh = SubResource("CylinderMesh_y35xu")
+
+[node name="HurtBox" type="Area3D" parent="TestArea"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TestArea/HurtBox"]
+transform = Transform3D(1.1, 0, 0, 0, 2.2, 0, 0, 0, 1.1, 0, 0, 0)
+shape = SubResource("BoxShape3D_gfjgm")

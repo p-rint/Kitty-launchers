@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://dk4rpg3ymk2ho"]
+
+[ext_resource type="Script" uid="uid://1hevyihh2q2b" path="res://character_body_3d.gd" id="1_xhfnw"]
+[ext_resource type="PackedScene" uid="uid://meoc156j8p72" path="res://Player_hitbox.tscn" id="2_kpjcp"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ljdd4"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_75x03"]
+
+[node name="CharacterBody3D" type="CharacterBody3D"]
+script = ExtResource("1_xhfnw")
+
+[node name="Node" type="Node" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_ljdd4")
+
+[node name="CamPivot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.38, 2.15)
+
+[node name="Camera3D" type="Camera3D" parent="CamPivot"]
+
+[node name="CharacterContainer" type="Node3D" parent="."]
+
+[node name="CharacterMesh" type="MeshInstance3D" parent="CharacterContainer"]
+mesh = SubResource("BoxMesh_75x03")
+skeleton = NodePath("../..")
+
+[node name="Hitboxes" type="Node3D" parent="CharacterContainer"]
+
+[node name="PlayerHitbox" parent="CharacterContainer/Hitboxes" instance=ExtResource("2_kpjcp")]

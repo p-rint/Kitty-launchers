@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://meoc156j8p72"]
+
+[ext_resource type="Script" uid="uid://ch1i3p3krhr33" path="res://PlayerHitbox.gd" id="1_xhi4u"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xhfnw"]
+
+[node name="PlayerHitbox" type="Area3D"]
+script = ExtResource("1_xhi4u")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, 0, 0, 0)
+shape = SubResource("BoxShape3D_xhfnw")
+
+[node name="Lifetime" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="timeout" from="Lifetime" to="." method="_on_lifetime_timeout"]
