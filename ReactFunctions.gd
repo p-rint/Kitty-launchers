@@ -16,6 +16,7 @@ func Gun1(enemy : CharacterBody3D) -> void:
 	var stunTimer : Timer = enemy.get_node("Timers/Stun")
 	stunTimer.start(.3)
 	enemy.velocity = dir * 20
+	enemy.health -= 50
 	
 	
 

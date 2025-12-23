@@ -17,15 +17,17 @@ var dt : float
 
 @onready var animTree: AnimationTree = $AnimationTree
 
+@onready var bulletSpawn = $CharacterContainer/Armature/Skeleton3D/BoneAttachment3D/catzooka/Cube/spawn
 
 func flatten(vector: Vector3) -> Vector3:
 	return Vector3( vector.x, 0, vector.z)
 
 func move() -> void:
+	model.rotation.y = lerp_angle(model.rotation.y, atan2(camPiv.basis.z.x, camPiv.basis.z.z), .2)
 	if direction:
 		velocity.x = lerp(velocity.x, direction.x * SPEED, .15 * 2)
 		velocity.z = lerp(velocity.z, direction.z * SPEED, .15 * 2)
-		model.rotation.y = lerp_angle(model.rotation.y, atan2(-velocity.x, -velocity.z), .2)
+		#model.rotation.y = lerp_angle(model.rotation.y, atan2(-velocity.x, -velocity.z), .2)
 	else:
 		velocity.x = move_toward(velocity.x, 0, .15 * 3)
 		velocity.z = move_toward(velocity.z, 0, .15 * 3)

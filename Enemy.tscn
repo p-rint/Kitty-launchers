@@ -1,0 +1,52 @@
+[gd_scene load_steps=6 format=3 uid="uid://dtresc0osufek"]
+
+[ext_resource type="Script" uid="uid://cea4ph718stbs" path="res://enemy_body_3d.gd" id="1_tt7e2"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ljdd4"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_75x03"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8nbaf"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_tt7e2"]
+viewport_path = NodePath("Sprite3D/SubViewport")
+
+[node name="EnemyBody3D" type="CharacterBody3D"]
+script = ExtResource("1_tt7e2")
+
+[node name="Timers" type="Node" parent="."]
+
+[node name="Stun" type="Timer" parent="Timers"]
+one_shot = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_ljdd4")
+
+[node name="CharacterContainer" type="Node3D" parent="."]
+
+[node name="CharacterMesh" type="MeshInstance3D" parent="CharacterContainer"]
+mesh = SubResource("BoxMesh_75x03")
+skeleton = NodePath("../..")
+
+[node name="Hurtbox" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hurtbox"]
+transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, 0, 0, 0)
+shape = SubResource("BoxShape3D_8nbaf")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5285339, 0)
+billboard = 1
+texture = SubResource("ViewportTexture_tt7e2")
+
+[node name="SubViewport" type="SubViewport" parent="Sprite3D"]
+size = Vector2i(300, 50)
+
+[node name="HealthBar" type="ProgressBar" parent="Sprite3D/SubViewport"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+value = 100.0

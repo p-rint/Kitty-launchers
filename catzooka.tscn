@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://dlhfaffl0rni2"]
+
+[ext_resource type="PackedScene" uid="uid://bsg15ukb8mfe8" path="res://catzooka.glb" id="1_226nt"]
+
+[node name="catzooka" instance=ExtResource("1_226nt")]
+
+[node name="spawn" type="Node" parent="Cube" index="0"]

@@ -5,15 +5,19 @@ var input_dir : Vector2
 
 @onready var plr = $"../../CharacterBody3D"
 
-const SPEED = 1.0
+const SPEED = 3.0
 const JUMP_VELOCITY = 4.5
 
 var isStunned = false
 
 @onready var stunTimer = $Timers/Stun
 
+var health = 100
+
+@onready var healthBar = $Sprite3D/SubViewport/HealthBar
+
 func flatten(vector: Vector3) -> Vector3:
-	return Vector3( vector.x, 0, vector.z)
+	return Vector3(vector.x, 0, vector.z)
 
 func move() -> void:
 	if direction and isStunned == false:
@@ -23,7 +27,11 @@ func move() -> void:
 		velocity.x = move_toward(velocity.x, 0, 5)
 		velocity.z = move_toward(velocity.z, 0, 5)
 
-
+func isAlive():
+	if health <= 0:
+		queue_free()
+	else:
+		healthBar.value = lerpf(healthBar.value,health,.15)
 
 func _physics_process(delta: float) -> void:
 	if stunTimer.time_left > 0:
@@ -38,5 +46,6 @@ func _physics_process(delta: float) -> void:
 
 	direction = (plr.position - position).normalized()
 	move()
-
+	
+	isAlive()
 	move_and_slide()

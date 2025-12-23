@@ -12,7 +12,7 @@ extends Node
 
 
 func Atk1() -> void:
-	Player.velocity.z = -0
+	#Player.velocity.z = -0
 	var new = box.instantiate()
 	new.reaction = reactions.Atk1
 	plrHitboxes.add_child(new)
@@ -21,7 +21,7 @@ func Gun1() -> void:
 	
 	var new = projectile.instantiate()
 	new.reaction = reactions.Gun1
-	new.position = Player.position
+	new.position = Player.bulletSpawn.global_position #Player.position
 	new.direction = (-Player.camPiv.basis.z).normalized()
 	new.upVec = -(Player.camPiv.basis.y).normalized()
 	Projectiles.add_child(new)
@@ -36,6 +36,6 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("Attack"):
-		Atk1()
+		Gun1()
 	if Input.is_action_just_pressed("Shoot"):
 		Gun1()
