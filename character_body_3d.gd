@@ -11,6 +11,10 @@ const JUMP_VELOCITY = 4.5
 
 @onready var AttackFuncs = $"../GameFunctions/Attacks"
 
+@onready var model = $CharacterContainer
+
+var dt : float
+
 func flatten(vector: Vector3) -> Vector3:
 	return Vector3( vector.x, 0, vector.z)
 
@@ -18,12 +22,14 @@ func move() -> void:
 	if direction:
 		velocity.x = direction.x * SPEED
 		velocity.z = direction.z * SPEED
+		model.rotation.y = lerp_angle(model.rotation.y, atan2(-velocity.x, -velocity.z), .2)
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 
 
 func _physics_process(delta: float) -> void:
+	dt = delta
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
@@ -35,7 +41,7 @@ func _physics_process(delta: float) -> void:
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	input_dir = Input.get_vector("Left", "Right", "Up", "Down")
-	direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	direction = flatten($CamPivot.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	move()
 
 	move_and_slide()

@@ -67,3 +67,5 @@ skeleton = NodePath("../..")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Enemies/EnemyBody3D/Hurtbox"]
 transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, 0, 0, 0)
 shape = SubResource("BoxShape3D_8nbaf")
+
+[node name="Projectiles" type="Node3D" parent="."]

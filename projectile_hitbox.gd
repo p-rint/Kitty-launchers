@@ -11,16 +11,19 @@ var alreadyHit = []
 
 var direction = Vector3(0,0,-1)
 
+var upVec = Vector3(0,1,0)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	ID = randi()
+	look_at(direction + position, upVec)
 	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	position += direction * Vector3(1,1,1)
+	
 
 
 func hasHit(area : Area3D) -> bool:
